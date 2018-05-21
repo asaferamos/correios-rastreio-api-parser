@@ -15,7 +15,9 @@ $app = new \Slim\App([
 
 
 $app->get('/', function ($request, $response){
-    return $response->withRedirect(SYSTEM_URL);
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode('Adicione o código de rastreio na url: http://[...]/RE999999999BR'));
 });
 
 
