@@ -1,5 +1,5 @@
 {
-    "name": "baru/correios-rastreio-parser",
+    "name": "baru/correios",
     "description": "Biblioteca que gera uma API a partir de parsing da página de rastreio dos Correios.",
     "keywords": ["correios", "correios api", "rastrerio correios"],
     "license": "Apache-2.0",
@@ -18,7 +18,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "Baru\\": "src/"
+            "Baru\\Correios": "src/Correios"
         }
     }
 }

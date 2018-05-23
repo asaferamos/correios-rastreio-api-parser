@@ -1,6 +1,6 @@
 <?php
 
-namespace Baru;
+namespace Baru\Correios;
 
 class RastreioParser{
 
