@@ -2,7 +2,7 @@
     "name": "baru/correios-rastreio-parser",
     "description": "Biblioteca que gera uma API a partir de parsing da página de rastreio dos Correios.",
     "keywords": ["correios", "correios api", "rastrerio correios"],
-    "license": "DBAD",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Asafe Ramos",
@@ -18,7 +18,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "Baru\\CorreiosRastreioParser\\": "src/"
+            "Baru\\": "src/"
         }
     }
 }

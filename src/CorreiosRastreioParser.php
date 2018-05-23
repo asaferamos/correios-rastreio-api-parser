@@ -1,6 +1,8 @@
-<?php namespace Baru\Correios;
+<?php
 
-class CorreiosRastreioParser{
+namespace Baru;
+
+class RastreioParser{
 
     private $_conf;
     
