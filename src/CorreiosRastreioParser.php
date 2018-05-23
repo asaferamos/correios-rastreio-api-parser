@@ -1,12 +1,28 @@
-<?php
-namespace App\Controllers;
+<?php namespace Baru\Correios;
 
-class CorreiosController{
-    
+class CorreiosRastreioParser{
+
     private $_conf;
     
-    public function __construct($_conf) {
-        $this->_conf = CONF;
+    public function __construct($_conf = null) {
+        if(is_null($_conf)){
+            $_conf = [
+                'status' => [
+                    'completed' => 'Objeto entregue ao destinatário'
+                ],
+                'regexp' => [
+                    'table'   => '/(?s)(?<=\<table class=\"listEvent sro\"\>)(.*?)(?=\<\/table\>)/',
+                    'tr'      => '/(?s)(?<=\<tr\>)(.*?)(?=\<\/tr\>)/',
+                    'dtEvent' => '/(?s)(?<=\<td class=\"sroDtEvent\" valign=\"top\">)(.*?)(?=\<\/td\>)/',
+                    'lbEvent' => '/(?s)(?<=\<td class=\"sroLbEvent\">)(.*?)(?=\<\/td\>)/',
+                    'hour'    => '/[0-9]{2}:[0-9]{2}/',
+                    'date'    => '/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/'
+                ],
+                'urlParser' => 'http://www2.correios.com.br/sistemas/rastreamento/newprint.cfm'
+            ];
+        }
+        
+        $this->_conf = $_conf;
     }
     
     public function getListEvents($correiosTrack){
@@ -77,6 +93,4 @@ class CorreiosController{
         
         return $correiosPage;
     }
-
-
 }
