@@ -18,7 +18,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "Baru\\Correios": "src/Correios"
+            "Baru\\Correios\\": "src/Correios"
         }
     }
 }
