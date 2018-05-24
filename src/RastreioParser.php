@@ -91,7 +91,8 @@ class RastreioParser{
             preg_match_all($this->_conf['regexp']['lbEvent'], $vTr, $vTd);
 
             $new_str = str_replace("&nbsp;", ' ', strip_tags($vTd[0][0]));
-            $lines = explode("\n", $new_str);
+            $lines = str_replace("\r", '', $new_str);
+            $lines = explode("\n", $lines);
             
             $i = 0;
             $description = "";
