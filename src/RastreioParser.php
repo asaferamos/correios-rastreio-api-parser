@@ -1,10 +1,20 @@
 <?php
+/**
+ * Correios Rastreio API Parser
+ * 2018
+ *
+ * @author    Asafe Ramos <asafe@asaferamos.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+
 
 namespace Baru\Correios;
 
 class RastreioParser{
 
     private $_conf;
+    private $code;
     
     public function __construct($_conf = null) {
         if(is_null($_conf)){
@@ -27,9 +37,17 @@ class RastreioParser{
         $this->_conf = $_conf;
     }
     
-    public function getListEvents($correiosTrack){
+    public function setCode($code){
+        $this->code = $code;
+    }
+    
+    public function getCode(){
+        return $this->code;
+    }
+    
+    public function getEventsList(){
         $data = array(
-            'objetos' => $correiosTrack
+            'objetos' => $this->code
         );
         
         $correiosPage = self::getPage($data);
@@ -50,20 +68,22 @@ class RastreioParser{
         /* Percorre todas <tr> para capturar eventos */
         $events = [];
         foreach ($cTr[0] as $event_id => $vTr) {
+            $Event = new RastreioEvento();
+            
             preg_match_all($this->_conf['regexp']['dtEvent'], $vTr, $vTd);
             $new_str = str_replace("&nbsp;", ' ', strip_tags($vTd[0][0]));
             $lines = explode("\n", $new_str);
             
-            foreach ($lines as $i => $line) {
+            foreach ($lines as $line) {
                 $line = ltrim($line);
                 if(!empty($line)){
                     if(preg_match($this->_conf['regexp']['date'],$line)){
-                        $events[$event_id]['date'] = $line;
+                        $Event->setDate($line);
                     }else{
                         if(preg_match($this->_conf['regexp']['hour'],$line)){
-                            $events[$event_id]['hour'] = $line;
+                            $Event->setHour($line);
                         }else{
-                            $events[$event_id]['location'] = $line;
+                            $Event->setLocation($line);
                         }
                     }
                 }
@@ -74,11 +94,24 @@ class RastreioParser{
             $new_str = str_replace("&nbsp;", ' ', strip_tags($vTd[0][0]));
             $lines = explode("\n", $new_str);
             
+            $i = 0;
+            $description = "";
             foreach ($lines as $line) {
                 $line = ltrim($line);
-                if(!empty($line))
-                    $events[$event_id]['label'] = $line;
+                if(empty($line))
+                    continue;
+                
+                $i++;
+                
+                if($i == 1)
+                    $Event->setLabel($line);
+                else {
+                    $description .= $line; 
+                }
             }
+            
+            $Event->setDescription($description);            
+            $events[] = $Event;
         }
         
         return $events;
