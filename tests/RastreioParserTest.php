@@ -8,7 +8,6 @@
  *
  */
 
-
 class RastreioParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testIsThereAnySyntaxError(){
@@ -35,6 +34,17 @@ class RastreioParserTest extends PHPUnit_Framework_TestCase{
 		foreach ($E as $key => $value) {
 			var_dump($value);
 		}
+		
+		unset($C);
+	}
+	
+	public function testGetEventLast(){
+		$C = new Baru\Correios\RastreioParser;
+
+		$C->setCode('RE881746675BR');
+		$E = $C->getEventLast();
+		
+		var_dump($E);
 		
 		unset($C);
 	}

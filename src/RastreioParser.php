@@ -8,7 +8,6 @@
  *
  */
 
-
 namespace Baru\Correios;
 
 class RastreioParser{
@@ -115,6 +114,10 @@ class RastreioParser{
         }
         
         return $events;
+    }
+    
+    public function getEventLast(){        
+        return self::getEventsList()[0];
     }
     
     private function getPage($data){
