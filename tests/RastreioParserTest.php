@@ -28,24 +28,37 @@ class RastreioParserTest extends PHPUnit_Framework_TestCase{
 	public function testGetEventsList(){
 		$C = new Baru\Correios\RastreioParser;
 
-		$C->setCode('RE881745030BR');
-		$E = $C->getEventsList();
-
-		foreach ($E as $key => $value) {
-			var_dump($value);
+		$C->setCode('RE88174514BR');
+		
+		try {
+			
+			$E = $C->getEventsList();
+		
+			foreach ($E as $key => $value) {
+				var_dump($value);
+			}
+			
+			unset($C);
+			
+		} catch (\Exception $e) {
+			echo $e->getMessage();
 		}
 		
-		unset($C);
 	}
 	
 	public function testGetEventLast(){
 		$C = new Baru\Correios\RastreioParser;
-
-		$C->setCode('RE881746675BR');
-		$E = $C->getEventLast();
+	
+		$C->setCode('RE88174514BR');
 		
-		var_dump($E);
+		try {
+			$E = $C->getEventLast();
 		
-		unset($C);
+			var_dump($E);
+		
+			unset($C);
+		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 }

@@ -56,11 +56,12 @@ class RastreioParser{
          * @var [type]
          */
         preg_match_all($this->_conf['regexp']['table'], $correiosPage, $cTable, PREG_SET_ORDER,0);
-        
         /**
          * Regeexp para captura das <tr>
          * @var [type]
          */
+        if(empty($cTable)) return false;
+        
         preg_match_all($this->_conf['regexp']['tr'], $cTable[0][0], $cTr);
         
         
