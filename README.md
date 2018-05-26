@@ -6,23 +6,35 @@ API construída a partir de parsing da página de rastreio dos Correios.
 
 
 ## Utilização
-Adicione o código de rastreio na url:
-`http://localhost/correios/RE999999999BR`
 
-#### Retorno
+```
+$Correios = new \Baru\Correios\RastreioParser();
+$Correios->setCode('RE999999999BR');
 
-    [
-	    {
-		    "date": "12/01/2013",
-		    "hour": "18:35",
-		    "location": "Goiânia - GO",
-		    "label": "Objeto entregue ao destinatário"
-	    },
-	    {
-		    "date": "12/12/2012",
-		    "hour": "12:12",
-		    "location": "Valparaíso - GO",
-		    "label": "Objeto postado"
-	    }
+//Último evento
+$Evento = $Correios->getEventLast();
 
-    ]
+//Lista todos eventos
+$Eventos = $Correios->getEventsList();
+```
+
+#### Evento
+Label
+`$evento->getLabel();`
+> _Objeto postado_
+---
+Location
+`$evento->getLocation();`
+> _Goiânia / GO_
+---
+Date
+`$evento->getDate();`
+> _12/12/2012_
+---
+Hour
+`$evento->getHour();`
+> _12:12_
+---
+Description
+`$evento->getDescription();`
+> _de Unidade de Distribuição em SUMARE / SP para Agência dos Correios em SUMARE / SP_
