@@ -29,7 +29,7 @@ class RastreioParser{
                     'hour'    => '/[0-9]{2}:[0-9]{2}/',
                     'date'    => '/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/'
                 ],
-                'urlParser' => 'http://www2.correios.com.br/sistemas/rastreamento/newprint.cfm'
+                'urlParser' => 'https://www2.correios.com.br/sistemas/rastreamento/newprint.cfm'
             ];
         }
         
